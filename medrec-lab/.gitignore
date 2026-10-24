@@ -1,0 +1,10 @@
+node_modules/
+artifacts/
+cache/
+typechain-types/
+data/provider.db
+data/deploy-state.json
+gatekeeper/access.log
+bench/results/*.csv
+bench/results/*.txt
+bench/results/*.json

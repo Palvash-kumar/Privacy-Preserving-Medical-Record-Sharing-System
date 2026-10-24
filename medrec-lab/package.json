@@ -1,0 +1,36 @@
+{
+  "name": "medrec-lab",
+  "version": "1.0.0",
+  "description": "MedRec baseline implementation — Privacy-Preserving Medical Record Sharing System",
+  "main": "index.js",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "node": "npx hardhat node",
+    "deploy": "npx hardhat run client/deploy.js",
+    "gatekeeper": "node gatekeeper/index.js",
+    "bench:gas": "npx hardhat run bench/gas-bench.js",
+    "bench:latency": "npx hardhat run bench/latency-bench.js",
+    "demo:weakness": "npx hardhat run analysis/weakness-demos.js",
+    "demo:observer": "npx hardhat run analysis/chain-observer.js"
+  },
+  "keywords": [
+    "medrec",
+    "blockchain",
+    "privacy",
+    "medical-records"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.2",
+    "hardhat": "^2.29.1",
+    "hardhat-gas-reporter": "^2.3.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "ethers": "^6.17.0",
+    "express": "^5.3.0"
+  }
+}
