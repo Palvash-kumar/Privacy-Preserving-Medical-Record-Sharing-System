@@ -1,134 +1,160 @@
-# Privacy-Preserving Medical Record Sharing System — Project Pack
+# Privacy-Preserving Medical Record Sharing System (MedRec + MedRec+)
 
-## The decision
+This repository contains the complete implementation, security evaluations, benchmarks, and progress documentation for:
+1. **MedRec Baseline** (Azaria et al., 2016): Smart contracts manage pointers, hashes, and access permissions while medical records reside off-chain behind an authenticating Gatekeeper.
+2. **MedRec+ Privacy & Security Improvements**: E1 envelope encryption (AES-256-GCM + X25519 ECIES key wrapping), E2 pairwise pseudonymous addresses and hidden salted commitments, E3 time-bound expiring grants and DEK rotation, and E4 emergency break-glass access.
 
-- **Paper to implement:** MedRec (Azaria et al., 2016). Smart contracts hold pointers, hashes and permissions; the data stays in the provider's database behind a gatekeeper.
-- **Paper that feeds the improvement:** Li et al. (IEEE TPDS 2013), attribute-based encryption for personal health records. Its file-key pattern and break-glass idea are reused, but it is not reimplemented because it needs pairing cryptography and is too heavy for a course timeline.
-- **Improvement ("MedRec+"):** encrypt records and wrap keys per viewer, reduce what a chain observer can link, and add expiring grants (optionally emergency break-glass access). The MedRec paper describes no encryption of the off-chain data (contract-level encryption was left out of the prototype) and its authors acknowledge that pseudonymous transactions still reveal treatment patterns, so the improvement targets a documented gap.
+---
 
-## What is in this directory
+## Repository Map
 
-| File / Folder | Purpose |
+| File / Directory | Description |
 |---|---|
-| `medrec-lab/` | Implementation of MedRec baseline: Solidity contracts, Gatekeeper service, benchmarks, weakness demos, and CLI |
-| `01_paper_selection.md` | The two papers, scoring, why MedRec wins, other papers for related work |
-| `02_implementation_plan_baseline.md` | How to build MedRec: architecture, contract sketch, schedule, baseline metrics, weakness demos |
-| `03_improvement_plan.md` | Challenges, threat model, MedRec+ design, hypotheses and experiments, priorities |
-| `04_report_roadmap.md` | Maps your teacher's nine sections to what you build, plus a checklist against the six instructions |
-| `papers/README_papers.md` | Citations, download links, instructions to add the PDFs |
-| `papers/references.bib` | BibTeX |
-| `code/envelope.selftest.js` | Tested Node.js example of the encryption and key-wrapping core (`node envelope.selftest.js`, needs only Node.js) |
+| `PROJECT_PROGRESS.md` | Single source of truth tracking all 36 requirements, test statistics, and side-by-side results |
+| `FINAL_EVALUATION.md` | Comprehensive evaluation summary, threat model verification, and honest limitations |
+| `medrec-lab/contracts/` | Solidity contracts: `Registrar.sol`, `Summary.sol`, `PPR.sol` (baseline) + `PPRPlus.sol`, `RegistrarPlus.sol` (MedRec+) |
+| `medrec-lab/gatekeeper/` | Dual-mode Gatekeeper service (`index.js`) and cryptographic envelope library (`crypto-envelope.js`) |
+| `medrec-lab/client/` | Deployment and CLI workflows: `cli.js` & `deploy.js` (baseline) + `cli-plus.js` & `deploy-plus.js` (MedRec+) |
+| `medrec-lab/test/` | Automated test suites: `medrec.test.js` (contracts), `gatekeeper-integration.js` (Gatekeeper), `medrec-plus.test.js` (MedRec+ & security) |
+| `medrec-lab/bench/` | Benchmarks: `gas-bench.js`, `latency-bench.js`, `throughput-bench.js`, `security-experiments.js`, `generate-charts.js` |
+| `medrec-lab/analysis/` | Weakness and observer scripts: `weakness-demos.js` (D1–D4), `chain-observer.js` (D2), `observer-compare.js` (H2) |
+| `medrec-lab/bench/results/` | CSV benchmarks, JSON reports, and generated SVG visualization charts |
+| `code/envelope.selftest.js` | Standalone zero-dependency self-test for AES-256-GCM + X25519 key wrapping |
 
-## How to Run
+---
 
-### 1. Prerequisites & Installation
+## Quick Start & Verification
 
-Ensure you have Node.js (v18+) installed.
+### 1. Installation
+
+Ensure Node.js (v18+) is installed:
 
 ```bash
 cd medrec-lab
 npm install
 ```
 
----
+### 2. Run All Automated Tests (41 Tests in < 1 Second)
 
-### 2. Quick Automated Tests & Benchmarks (Single Command)
+Executes all contract unit tests, Gatekeeper in-process integration tests, cryptographic envelope tests, and security tests:
 
-All tests run against a built-in ephemeral blockchain node and complete in seconds:
+```bash
+npm test
+```
 
-- **Smart Contract Test Suite (15 unit tests):**
-  ```bash
-  npm test
-  ```
-- **MedRec Baseline Weakness Demos (D1–D4):**
-  ```bash
-  npm run demo:weakness
-  ```
-  *(Demonstrates plaintext database, linkable on-chain metadata, forward-only revocation, and gatekeeper bypass)*
-- **Chain Observer & Graph Reconstruction:**
+*Output summary: 41 passing (0 failures).*
+
+### 3. Run Security Experiments (H1–H7)
+
+Runs the comprehensive security evaluation suite (database plaintext scan H1, cryptographic overhead H3, gas ablation H4, access cutoff H5, emergency break-glass H6, and tamper detection H7):
+
+```bash
+npm run bench:security
+```
+
+*Outputs CSV and JSON reports to `bench/results/security-experiments.csv` and `bench/results/security-experiments.json`.*
+
+### 4. Run Linkability & Observer Analysis (D2 & H2)
+
+- **Baseline Chain Observer (D2):**
   ```bash
   npm run demo:observer
   ```
+- **Side-by-Side Linkability Comparison (H2 Baseline vs MedRec+):**
+  ```bash
+  npm run demo:compare
+  ```
+
+*Outputs to `bench/results/observer-comparison.csv` and `bench/results/observer-report.json`.*
+
+### 5. Run Baseline Weakness Demonstrations (D1–D4)
+
+Demonstrates plaintext database exposure (D1), metadata linkability (D2), forward-only revocation (D3), and direct database bypass (D4):
+
+```bash
+npm run demo:weakness
+```
+
+### 6. Run Performance Benchmarks (B1–B6)
+
 - **Gas Benchmark (B1–B2):**
   ```bash
   npm run bench:gas
   ```
-  *(Outputs results to `bench/results/gas-bench.csv`)*
-- **Latency Benchmark (B3/B5/B6):**
+  *(Outputs to `bench/results/gas-bench.csv`)*
+
+- **Latency Benchmark (B3, B5, B6):**
   ```bash
   npm run bench:latency
   ```
-  *(Outputs results to `bench/results/latency-bench.csv`)*
-- **MedRec+ Cryptographic Key-Wrapping Self-Test:**
+  *(Measures instant, 2s, and 12s mining intervals; outputs to `bench/results/latency-bench.csv`)*
+
+- **Concurrent Client Throughput (B4):**
   ```bash
-  node ../code/envelope.selftest.js
+  npm run bench:throughput
   ```
-  *(Zero dependencies; tests AES-256-GCM + X25519 ECIES envelope encryption)*
+  *(Measures 1, 10, 50, 100 concurrent clients; outputs to `bench/results/throughput-bench.csv`)*
+
+- **Generate SVG Charts:**
+  ```bash
+  npm run charts
+  ```
+  *(Generates `chart-gas-comparison.svg`, `chart-latency-payload.svg`, and `chart-throughput-latency.svg` in `bench/results/`)*
 
 ---
 
-### 3. Interactive Multi-Process System (Node + Gatekeeper + CLI)
+## Interactive CLI Workflows
 
-To test the live distributed architecture across independent processes:
+### MedRec+ Workflows (`client/cli-plus.js`)
 
-1. **Terminal 1 — Start Local Blockchain Node:**
+1. **Deploy MedRec+ & Seed Encrypted Database:**
    ```bash
-   cd medrec-lab
-   npm run node
+   npm run deploy:plus
    ```
-   *(Runs Hardhat node at `http://127.0.0.1:8545`)*
 
-2. **Terminal 2 — Deploy Contracts & Seed Database:**
+2. **Retrieve and Decrypt Record (Viewer Role):**
    ```bash
-   cd medrec-lab
-   npm run deploy -- --network localhost
+   node client/cli-plus.js retrieve --role viewer
    ```
-   *(Deploys Registrar & PPR contracts, seeds SQLite provider DB, and writes `data/deploy-state.json`)*
+   *(Gatekeeper returns ciphertext blob; client unwraps DEK using X25519 private key and decrypts via AES-256-GCM)*
 
-3. **Terminal 2 — Start Gatekeeper Service:**
+3. **Check PPRPlus State & Expiry Timestamps:**
    ```bash
-   npm run gatekeeper
+   node client/cli-plus.js status
    ```
-   *(Starts HTTP Gatekeeper on `http://127.0.0.1:3000`)*
 
-4. **Terminal 3 — Run Client CLI Workflows:**
+4. **Revoke Viewer Access:**
    ```bash
-   cd medrec-lab
+   node client/cli-plus.js revoke
+   ```
 
-   # View current relationship & permission status
-   node client/cli.js status
+5. **Attempt Retrieval as Revoked Viewer (Fails with 403 Forbidden):**
+   ```bash
+   node client/cli-plus.js retrieve --role viewer
+   ```
 
-   # Authorized viewer retrieval (200 OK + data verified against on-chain hash)
+6. **Trigger Break-Glass Emergency Access:**
+   ```bash
+   node client/cli-plus.js emergency "ACUTE_MYOCARDIAL_INFARCTION" 3600
+   node client/cli-plus.js retrieve --role emergency
+   ```
+
+---
+
+### Baseline Workflows (`client/cli.js`)
+
+1. **Deploy Baseline System:**
+   ```bash
+   npm run deploy
+   ```
+
+2. **Retrieve Plaintext Records:**
+   ```bash
    node client/cli.js retrieve --role viewer
+   ```
 
-   # Patient retrieves own records
-   node client/cli.js retrieve --role patient
-
-   # Patient revokes viewer access on-chain
+3. **Revoke and Share:**
+   ```bash
    node client/cli.js revoke
-
-   # Viewer retrieval re-attempt (fails with 403 Forbidden)
-   node client/cli.js retrieve --role viewer
-
-   # Patient restores viewer access
    node client/cli.js share
    ```
-
-5. **Terminal 3 — Run Gatekeeper Integration Tests:**
-   ```bash
-   npx hardhat run test/gatekeeper-integration.js --network localhost
-   ```
-
----
-
-## Suggested order of work
-
-1. Read `01` and confirm the choice with your teacher or group.
-2. Follow `02` for the baseline (about three weeks of effort), collecting the baseline numbers as you go.
-3. Follow `03`, finishing the "Must" tier first.
-4. Use `04` while writing the report.
-
-## What I verified and what is yours to check
-
-Verified by reading the papers' text: the three-contract design, off-chain storage, the authors' stated limitations for MedRec, and Li et al.'s domains, revocation, break-glass and evaluation setup. The scoring table and the improvement design are my own judgment. Gas, latency and linkability numbers will come from your own experiments; none are quoted here. Check regulation references (DPDP Act, ABDM, HIPAA) before citing them.
-

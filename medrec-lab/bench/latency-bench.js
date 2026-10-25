@@ -70,6 +70,33 @@ async function main() {
     await ppr.canView(viewer.address, "read-test");
   });
 
+  // ── B3: Interval mining (2s and 12s) ──
+  console.log(`\n══ B3: Interval mining (2s and 12s block intervals) ══\n`);
+  for (const intervalSec of [2, 12]) {
+    await ethers.provider.send("evm_setAutomine", [false]);
+    await ethers.provider.send("evm_setIntervalMining", [intervalSec * 1000]);
+
+    const intervalRuns = 3;
+    const times = [];
+    for (let i = 0; i < intervalRuns; i++) {
+      const start = performance.now();
+      const hash = ethers.keccak256(ethers.toUtf8Bytes(`interval-${intervalSec}-${i}`));
+      const tx = await ppr.connect(provider).addPointer(`sel-int-${intervalSec}-${i}`, hash);
+      await tx.wait();
+      times.push(performance.now() - start);
+    }
+    const mean = times.reduce((a, b) => a + b, 0) / times.length;
+    const sorted = [...times].sort((a, b) => a - b);
+    const p95 = sorted[Math.floor(sorted.length * 0.95)];
+    const sd = Math.sqrt(times.reduce((s, v) => s + (v - mean) ** 2, 0) / times.length);
+    results.push({ operation: `addPointer_${intervalSec}s_block`, mean_ms: mean.toFixed(2), sd_ms: sd.toFixed(2), p95_ms: p95.toFixed(2) });
+    console.log(`  addPointer (${intervalSec}s block): mean=${mean.toFixed(1)}ms, sd=${sd.toFixed(1)}ms, p95=${p95.toFixed(1)}ms`);
+
+    // Reset back to instant automining
+    await ethers.provider.send("evm_setIntervalMining", [0]);
+    await ethers.provider.send("evm_setAutomine", [true]);
+  }
+
   // ── B5: Retrieval latency vs number of pointers ──
   console.log(`\n══ B5: canView latency vs pointer count ══\n`);
   for (const count of [10, 100, 1000]) {

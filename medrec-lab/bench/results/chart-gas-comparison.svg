@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 480" width="850" height="480">
+    <rect width="850" height="480" fill="#FFFFFF" />
+    <text x="425" y="32" font-size="18" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#111827">Gas Consumption: Baseline vs MedRec+ (Event vs Storage Publishing)</text>
+    <text x="425" y="50" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#6B7280">Measured in Hardhat EVM — Source: bench/results/security-experiments.csv (H4)</text>
+
+    
+      <line x1="90" y1="400" x2="820" y2="400" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="80" y="404" font-size="11" font-family="sans-serif" text-anchor="end" fill="#6B7280">0 gas</text>
+    
+      <line x1="90" y1="351.42857142857144" x2="820" y2="351.42857142857144" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="80" y="355.42857142857144" font-size="11" font-family="sans-serif" text-anchor="end" fill="#6B7280">200,000 gas</text>
+    
+      <line x1="90" y1="302.8571428571429" x2="820" y2="302.8571428571429" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="80" y="306.8571428571429" font-size="11" font-family="sans-serif" text-anchor="end" fill="#6B7280">400,000 gas</text>
+    
+      <line x1="90" y1="254.2857142857143" x2="820" y2="254.2857142857143" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="80" y="258.28571428571433" font-size="11" font-family="sans-serif" text-anchor="end" fill="#6B7280">600,000 gas</text>
+    
+      <line x1="90" y1="205.71428571428572" x2="820" y2="205.71428571428572" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="80" y="209.71428571428572" font-size="11" font-family="sans-serif" text-anchor="end" fill="#6B7280">800,000 gas</text>
+    
+      <line x1="90" y1="157.14285714285714" x2="820" y2="157.14285714285714" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="80" y="161.14285714285714" font-size="11" font-family="sans-serif" text-anchor="end" fill="#6B7280">1,000,000 gas</text>
+    
+      <line x1="90" y1="108.57142857142861" x2="820" y2="108.57142857142861" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="80" y="112.57142857142861" font-size="11" font-family="sans-serif" text-anchor="end" fill="#6B7280">1,200,000 gas</text>
+    
+      <line x1="90" y1="60" x2="820" y2="60" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="80" y="64" font-size="11" font-family="sans-serif" text-anchor="end" fill="#6B7280">1,400,000 gas</text>
+    
+    
+      <!-- Register -->
+      <rect x="105" y="318.29605714285714" width="24" height="81.70394285714286" fill="#4F46E5" rx="3" />
+      <text x="117" y="312.29605714285714" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#312E81">336k</text>
+
+      <rect x="135" y="302.12614285714284" width="24" height="97.87385714285715" fill="#059669" rx="3" />
+      <text x="147" y="296.12614285714284" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#065F46">403k</text>
+
+      <rect x="165" y="302.12614285714284" width="24" height="97.87385714285715" fill="#D97706" rx="3" />
+      <text x="177" y="296.12614285714284" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#92400E">403k</text>
+
+      <text x="153" y="425" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1F2937" font-weight="600">Register</text>
+    
+      <!-- Create PPR -->
+      <rect x="251" y="118.17035714285714" width="24" height="281.82964285714286" fill="#4F46E5" rx="3" />
+      <text x="263" y="112.17035714285714" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#312E81">1160k</text>
+
+      <rect x="281" y="91.88350000000003" width="24" height="308.1165" fill="#059669" rx="3" />
+      <text x="293" y="85.88350000000003" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#065F46">1269k</text>
+
+      <rect x="311" y="91.88350000000003" width="24" height="308.1165" fill="#D97706" rx="3" />
+      <text x="323" y="85.88350000000003" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#92400E">1269k</text>
+
+      <text x="299" y="425" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1F2937" font-weight="600">Create PPR</text>
+    
+      <!-- Add Pointer -->
+      <rect x="397" y="377.21465714285716" width="24" height="22.785342857142858" fill="#4F46E5" rx="3" />
+      <text x="409" y="371.21465714285716" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#312E81">94k</text>
+
+      <rect x="427" y="371.9976" width="24" height="28.0024" fill="#059669" rx="3" />
+      <text x="439" y="365.9976" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#065F46">115k</text>
+
+      <rect x="457" y="371.9976" width="24" height="28.0024" fill="#D97706" rx="3" />
+      <text x="469" y="365.9976" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#92400E">115k</text>
+
+      <text x="445" y="425" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1F2937" font-weight="600">Add Pointer</text>
+    
+      <!-- Share Access -->
+      <rect x="543" y="360.7593857142857" width="24" height="39.24061428571429" fill="#4F46E5" rx="3" />
+      <text x="555" y="354.7593857142857" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#312E81">162k</text>
+
+      <rect x="573" y="359.5647714285714" width="24" height="40.435228571428574" fill="#059669" rx="3" />
+      <text x="585" y="353.5647714285714" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#065F46">166k</text>
+
+      <rect x="603" y="348.18399999999997" width="24" height="51.816" fill="#D97706" rx="3" />
+      <text x="615" y="342.18399999999997" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#92400E">213k</text>
+
+      <text x="591" y="425" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1F2937" font-weight="600">Share Access</text>
+    
+      <!-- Revoke -->
+      <rect x="689" y="391.2726857142857" width="24" height="8.727314285714286" fill="#4F46E5" rx="3" />
+      <text x="701" y="385.2726857142857" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#312E81">36k</text>
+
+      <rect x="719" y="392.3172142857143" width="24" height="7.682785714285715" fill="#059669" rx="3" />
+      <text x="731" y="386.3172142857143" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#065F46">32k</text>
+
+      <rect x="749" y="392.3172142857143" width="24" height="7.682785714285715" fill="#D97706" rx="3" />
+      <text x="761" y="386.3172142857143" font-size="10" font-family="sans-serif" text-anchor="middle" fill="#92400E">32k</text>
+
+      <text x="737" y="425" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1F2937" font-weight="600">Revoke</text>
+    
+
+    <!-- Legend -->
+    <g transform="translate(245, 455)">
+      <rect x="0" y="0" width="14" height="14" fill="#4F46E5" rx="2" />
+      <text x="20" y="11" font-size="12" font-family="sans-serif" fill="#374151">MedRec Baseline</text>
+
+      <rect x="140" y="0" width="14" height="14" fill="#059669" rx="2" />
+      <text x="160" y="11" font-size="12" font-family="sans-serif" fill="#374151">MedRec+ (Event-based)</text>
+
+      <rect x="310" y="0" width="14" height="14" fill="#D97706" rx="2" />
+      <text x="330" y="11" font-size="12" font-family="sans-serif" fill="#374151">MedRec+ (Storage-based)</text>
+    </g>
+  </svg>

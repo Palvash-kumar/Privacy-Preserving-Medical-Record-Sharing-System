@@ -110,14 +110,14 @@ async function main() {
   const revokeEvents = await pprContract.queryFilter("Revoked");
 
   const timeline = [
-    ...ptrEvents.map(e => ({ block: e.blockNumber, type: "PointerAdded", hash: e.args[1] })),
-    ...shareEvents.map(e => ({ block: e.blockNumber, type: "Shared", viewer: e.args[1], selector: e.args[2] })),
-    ...revokeEvents.map(e => ({ block: e.blockNumber, type: "Revoked", viewer: e.args[1], selector: e.args[2] })),
+    ...ptrEvents.map(e => ({ block: Number(e.blockNumber), type: "PointerAdded", index: Number(e.args[1]), hash: e.args[2] })),
+    ...shareEvents.map(e => ({ block: Number(e.blockNumber), type: "Shared", viewer: e.args[1], selector: e.args[2] })),
+    ...revokeEvents.map(e => ({ block: Number(e.blockNumber), type: "Revoked", viewer: e.args[1], selector: e.args[2] })),
   ].sort((a, b) => a.block - b.block);
 
   for (const t of timeline) {
     if (t.type === "PointerAdded") {
-      console.log(`   Block ${t.block}: PointerAdded hash=${t.hash}`);
+      console.log(`   Block ${t.block}: PointerAdded index=${t.index} hash=${t.hash}`);
     } else {
       console.log(`   Block ${t.block}: ${t.type} viewer=${t.viewer} selector="${t.selector}"`);
     }
@@ -141,8 +141,10 @@ async function main() {
     timeline,
     mode: "baseline",
   };
-  const outPath = path.join(__dirname, "..", "bench", "results", "observer-report.json");
-  fs.writeFileSync(outPath, JSON.stringify(report, null, 2));
+  const outDir = path.join(__dirname, "..", "bench", "results");
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+  const outPath = path.join(outDir, "observer-report.json");
+  fs.writeFileSync(outPath, JSON.stringify(report, (key, value) => typeof value === "bigint" ? value.toString() : value, 2));
   console.log(`   Report saved to ${outPath}`);
 }
 

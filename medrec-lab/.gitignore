@@ -4,6 +4,8 @@ cache/
 typechain-types/
 data/provider.db
 data/deploy-state.json
+data/deploy-state-plus.json
+.home/
 gatekeeper/access.log
 bench/results/*.csv
 bench/results/*.txt

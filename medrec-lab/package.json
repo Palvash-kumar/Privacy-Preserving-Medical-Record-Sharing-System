@@ -4,15 +4,20 @@
   "description": "MedRec baseline implementation — Privacy-Preserving Medical Record Sharing System",
   "main": "index.js",
   "scripts": {
-    "compile": "npx hardhat compile",
-    "test": "npx hardhat test",
-    "node": "npx hardhat node",
-    "deploy": "npx hardhat run client/deploy.js",
+    "compile": "HOME=\"$(pwd)/.home\" npx hardhat compile",
+    "test": "HOME=\"$(pwd)/.home\" npx hardhat test",
+    "node": "HOME=\"$(pwd)/.home\" npx hardhat node",
+    "deploy": "HOME=\"$(pwd)/.home\" npx hardhat run client/deploy.js",
+    "deploy:plus": "HOME=\"$(pwd)/.home\" npx hardhat run client/deploy-plus.js",
     "gatekeeper": "node gatekeeper/index.js",
-    "bench:gas": "npx hardhat run bench/gas-bench.js",
-    "bench:latency": "npx hardhat run bench/latency-bench.js",
-    "demo:weakness": "npx hardhat run analysis/weakness-demos.js",
-    "demo:observer": "npx hardhat run analysis/chain-observer.js"
+    "bench:gas": "HOME=\"$(pwd)/.home\" npx hardhat run bench/gas-bench.js",
+    "bench:latency": "HOME=\"$(pwd)/.home\" npx hardhat run bench/latency-bench.js",
+    "bench:throughput": "HOME=\"$(pwd)/.home\" npx hardhat run bench/throughput-bench.js",
+    "bench:security": "HOME=\"$(pwd)/.home\" npx hardhat run bench/security-experiments.js",
+    "charts": "node bench/generate-charts.js",
+    "demo:weakness": "HOME=\"$(pwd)/.home\" npx hardhat run analysis/weakness-demos.js",
+    "demo:observer": "HOME=\"$(pwd)/.home\" npx hardhat run analysis/chain-observer.js",
+    "demo:compare": "HOME=\"$(pwd)/.home\" npx hardhat run analysis/observer-compare.js"
   },
   "keywords": [
     "medrec",

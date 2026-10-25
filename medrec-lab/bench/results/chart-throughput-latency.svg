@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 480" width="850" height="480">
+    <rect width="850" height="480" fill="#FFFFFF" />
+    <text x="425" y="32" font-size="18" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#111827">Gatekeeper Throughput (req/s) &amp; p95 Latency (ms): Baseline vs MedRec+</text>
+    <text x="425" y="50" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#6B7280">Concurrent Client Load Scaling (1, 10, 50, 100 Clients) — Source: bench/results/throughput-bench.csv (B4)</text>
+
+    
+      <line x1="80" y1="420" x2="770" y2="420" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="70" y="424" font-size="11" font-family="sans-serif" text-anchor="end" fill="#059669">0 rps</text>
+    
+      <line x1="80" y1="360" x2="770" y2="360" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="70" y="364" font-size="11" font-family="sans-serif" text-anchor="end" fill="#059669">100 rps</text>
+    
+      <line x1="80" y1="300" x2="770" y2="300" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="70" y="304" font-size="11" font-family="sans-serif" text-anchor="end" fill="#059669">200 rps</text>
+    
+      <line x1="80" y1="240" x2="770" y2="240" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="70" y="244" font-size="11" font-family="sans-serif" text-anchor="end" fill="#059669">300 rps</text>
+    
+      <line x1="80" y1="180" x2="770" y2="180" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="70" y="184" font-size="11" font-family="sans-serif" text-anchor="end" fill="#059669">400 rps</text>
+    
+      <line x1="80" y1="120" x2="770" y2="120" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="70" y="124" font-size="11" font-family="sans-serif" text-anchor="end" fill="#059669">500 rps</text>
+    
+      <line x1="80" y1="60" x2="770" y2="60" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3" />
+      <text x="70" y="64" font-size="11" font-family="sans-serif" text-anchor="end" fill="#059669">600 rps</text>
+    
+      <text x="780" y="424" font-size="11" font-family="sans-serif" text-anchor="start" fill="#D97706">0 ms</text>
+    
+      <text x="780" y="372.57142857142856" font-size="11" font-family="sans-serif" text-anchor="start" fill="#D97706">50 ms</text>
+    
+      <text x="780" y="321.14285714285717" font-size="11" font-family="sans-serif" text-anchor="start" fill="#D97706">100 ms</text>
+    
+      <text x="780" y="269.7142857142857" font-size="11" font-family="sans-serif" text-anchor="start" fill="#D97706">150 ms</text>
+    
+      <text x="780" y="218.2857142857143" font-size="11" font-family="sans-serif" text-anchor="start" fill="#D97706">200 ms</text>
+    
+      <text x="780" y="166.85714285714283" font-size="11" font-family="sans-serif" text-anchor="start" fill="#D97706">250 ms</text>
+    
+      <text x="780" y="115.42857142857144" font-size="11" font-family="sans-serif" text-anchor="start" fill="#D97706">300 ms</text>
+    
+      <text x="780" y="64" font-size="11" font-family="sans-serif" text-anchor="start" fill="#D97706">350 ms</text>
+    
+
+    <!-- Throughput lines -->
+    <polyline fill="none" stroke="#059669" stroke-width="2.5" points="80,288.12 310,129.18 540,118.32 770,114.59999999999997" />
+    <polyline fill="none" stroke="#0284C7" stroke-width="2.5" points="80,215.34 310,155.33999999999997 540,159.18 770,163.91999999999996" />
+
+    <!-- Latency lines -->
+    <polyline fill="none" stroke="#D97706" stroke-width="2" stroke-dasharray="4,4" points="80,397.07314285714284 310,397.71085714285715 540,310.23085714285713 770,183.58285714285714" />
+    <polyline fill="none" stroke="#DC2626" stroke-width="2" stroke-dasharray="4,4" points="80,414.96 310,395.58171428571427 540,288.18857142857144 770,106.39885714285714" />
+
+    
+      <!-- Baseline -->
+      <circle cx="80" cy="288.12" r="4" fill="#059669" />
+      <text x="65" y="280.12" font-size="10" font-family="sans-serif" text-anchor="end" fill="#065F46">Base: 219.8</text>
+
+      <circle cx="80" cy="397.07314285714284" r="4" fill="#D97706" />
+      <text x="65" y="409.07314285714284" font-size="10" font-family="sans-serif" text-anchor="end" fill="#92400E">Base: 22.29ms</text>
+
+      <!-- MedRec+ -->
+      <circle cx="80" cy="215.34" r="4" fill="#0284C7" />
+      <text x="95" y="207.34" font-size="10" font-family="sans-serif" text-anchor="start" fill="#0369A1">Plus: 341.1</text>
+
+      <circle cx="80" cy="414.96" r="4" fill="#DC2626" />
+      <text x="95" y="426.96" font-size="10" font-family="sans-serif" text-anchor="start" fill="#991B1B">Plus: 4.90ms</text>
+
+      <text x="80" y="445" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1F2937" font-weight="600">1 Client</text>
+    
+      <!-- Baseline -->
+      <circle cx="310" cy="129.18" r="4" fill="#059669" />
+      <text x="295" y="121.18" font-size="10" font-family="sans-serif" text-anchor="end" fill="#065F46">Base: 484.7</text>
+
+      <circle cx="310" cy="397.71085714285715" r="4" fill="#D97706" />
+      <text x="295" y="409.71085714285715" font-size="10" font-family="sans-serif" text-anchor="end" fill="#92400E">Base: 21.67ms</text>
+
+      <!-- MedRec+ -->
+      <circle cx="310" cy="155.33999999999997" r="4" fill="#0284C7" />
+      <text x="325" y="147.33999999999997" font-size="10" font-family="sans-serif" text-anchor="start" fill="#0369A1">Plus: 441.1</text>
+
+      <circle cx="310" cy="395.58171428571427" r="4" fill="#DC2626" />
+      <text x="325" y="407.58171428571427" font-size="10" font-family="sans-serif" text-anchor="start" fill="#991B1B">Plus: 23.74ms</text>
+
+      <text x="310" y="445" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1F2937" font-weight="600">10 Clients</text>
+    
+      <!-- Baseline -->
+      <circle cx="540" cy="118.32" r="4" fill="#059669" />
+      <text x="525" y="110.32" font-size="10" font-family="sans-serif" text-anchor="end" fill="#065F46">Base: 502.8</text>
+
+      <circle cx="540" cy="310.23085714285713" r="4" fill="#D97706" />
+      <text x="525" y="322.23085714285713" font-size="10" font-family="sans-serif" text-anchor="end" fill="#92400E">Base: 106.72ms</text>
+
+      <!-- MedRec+ -->
+      <circle cx="540" cy="159.18" r="4" fill="#0284C7" />
+      <text x="555" y="151.18" font-size="10" font-family="sans-serif" text-anchor="start" fill="#0369A1">Plus: 434.7</text>
+
+      <circle cx="540" cy="288.18857142857144" r="4" fill="#DC2626" />
+      <text x="555" y="300.18857142857144" font-size="10" font-family="sans-serif" text-anchor="start" fill="#991B1B">Plus: 128.15ms</text>
+
+      <text x="540" y="445" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1F2937" font-weight="600">50 Clients</text>
+    
+      <!-- Baseline -->
+      <circle cx="770" cy="114.59999999999997" r="4" fill="#059669" />
+      <text x="755" y="106.59999999999997" font-size="10" font-family="sans-serif" text-anchor="end" fill="#065F46">Base: 509.0</text>
+
+      <circle cx="770" cy="183.58285714285714" r="4" fill="#D97706" />
+      <text x="755" y="195.58285714285714" font-size="10" font-family="sans-serif" text-anchor="end" fill="#92400E">Base: 229.85ms</text>
+
+      <!-- MedRec+ -->
+      <circle cx="770" cy="163.91999999999996" r="4" fill="#0284C7" />
+      <text x="785" y="155.91999999999996" font-size="10" font-family="sans-serif" text-anchor="start" fill="#0369A1">Plus: 426.8</text>
+
+      <circle cx="770" cy="106.39885714285714" r="4" fill="#DC2626" />
+      <text x="785" y="118.39885714285714" font-size="10" font-family="sans-serif" text-anchor="start" fill="#991B1B">Plus: 304.89ms</text>
+
+      <text x="770" y="445" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1F2937" font-weight="600">100 Clients</text>
+    
+
+    <!-- Legend -->
+    <g transform="translate(185, 460)">
+      <circle cx="0" cy="5" r="4" fill="#059669" />
+      <text x="10" y="9" font-size="11" font-family="sans-serif" fill="#374151">Base Throughput</text>
+
+      <circle cx="120" cy="5" r="4" fill="#0284C7" />
+      <text x="130" y="9" font-size="11" font-family="sans-serif" fill="#374151">MedRec+ Throughput</text>
+
+      <circle cx="260" cy="5" r="4" fill="#D97706" />
+      <text x="270" y="9" font-size="11" font-family="sans-serif" fill="#374151">Base p95 Latency</text>
+
+      <circle cx="380" cy="5" r="4" fill="#DC2626" />
+      <text x="390" y="9" font-size="11" font-family="sans-serif" fill="#374151">MedRec+ p95 Latency</text>
+    </g>
+  </svg>
